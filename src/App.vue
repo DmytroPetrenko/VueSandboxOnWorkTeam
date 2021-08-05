@@ -18,43 +18,17 @@
 </template>
 
 <script>
-// Change for change 2222
 import UsersList from "@/components/UsersList"
 import AddNewUser from "@/components/AddNewUser"
 import CustomInput from "@/components/CustomInput"
 import { eventBus } from "@/main"
 import UsersCounter from "@/components/UsersCounter"
+import { mapGetters, mapActions } from "vuex"
 
 export default {
 	name: "App",
 	data() {
 		return {
-			users: [
-				{
-					id: 1,
-					firstName: "Dmytro",
-					lastName: "Petrenko",
-					position: "Trainee Vue Js Developer",
-				},
-				{
-					id: 2,
-					firstName: "Valeriy",
-					lastName: "Nosenko",
-					position: "Trainee React Js Developer",
-				},
-				{
-					id: 3,
-					firstName: "Andriy",
-					lastName: "Parkhomenko",
-					position: "Senior Vue Js Developer",
-				},
-				{
-					id: 4,
-					firstName: "Artemon",
-					lastName: "Bulangery",
-					position: "Designer",
-				},
-			],
 			customInputText: "",
 			currentUser: null,
 			areUserInformationNeeded: false,
@@ -64,6 +38,9 @@ export default {
 		activeId() {
 			return this.currentUser ? this.currentUser.id : null
 		},
+		...mapGetters({
+			users: "users/allUsers",
+		}),
 	},
 	watch: {
 		users(val) {
@@ -92,6 +69,10 @@ export default {
 		setCurrentUser(user) {
 			this.currentUser = user
 		},
+		...mapActions({ getAllUsers: "users/getAllUsers" }),
+	},
+	async mounted() {
+		this.getAllUsers()
 	},
 }
 </script>
