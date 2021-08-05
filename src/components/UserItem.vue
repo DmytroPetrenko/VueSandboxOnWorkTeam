@@ -1,5 +1,5 @@
 <template>
-	<li @click="onClick" :class="[activeId == user.id ? 'active' : '']">
+	<li @click="onClick" :class="activeId == user.id ? 'active' : ''">
 		{{ fullName }}
 	</li>
 </template>
