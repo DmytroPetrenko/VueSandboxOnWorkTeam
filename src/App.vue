@@ -3,12 +3,12 @@
 		<div id="user-wrapper">
 			<UsersCounter />
 			<UsersList
-				v-bind:users="users"
+				:users="users"
 				:activeId="activeId"
 				@setCurrentUser="setCurrentUser"
 			/>
 			<div v-if="currentUser">
-				<UserInformation v-bind:user="currentUser" />
+				<UserInformation :user="currentUser" />
 			</div>
 		</div>
 		<AddNewUser @add-new-user="addNewUser" />
@@ -61,12 +61,12 @@ export default {
 		}
 	},
 	computed: {
-		activeId: function() {
+		activeId() {
 			return this.currentUser ? this.currentUser.id : null
 		},
 	},
 	watch: {
-		users: function(val) {
+		users(val) {
 			this.$notify({
 				title: "Success",
 				message: `You successfully add ${val[val.length - 1].firstName} ${

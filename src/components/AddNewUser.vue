@@ -8,7 +8,7 @@
 		label-width="120px"
 	>
 		<el-form-item label="Fullname">
-			<el-input :placeholder="fullNamePH" v-model="form.fullName"></el-input>
+			<el-input :placeholder="fullNamePH" v-model="form.fullName" />
 		</el-form-item>
 		<el-form-item label="Your birth date">
 			<el-date-picker
@@ -16,27 +16,27 @@
 				placeholder="Pick a date"
 				v-model="form.birthdate"
 				style="width: 100%;"
-			></el-date-picker>
+			/>
 		</el-form-item>
 		<el-form-item label="Position">
 			<el-select v-model="form.position" placeholder="please select position">
 				<el-option
 					label="Trainee Vue Js Developer"
 					value="Trainee Vue Js Developer"
-				></el-option>
+				/>
 				<el-option
 					label="Trainee React Js Developer"
 					value="Trainee React Js Developer"
-				></el-option>
+				/>
 				<el-option
 					label="Senior Vue Js Developer"
 					value="Senior Vue Js Developer"
-				></el-option>
+				/>
 				<el-option
 					label="Senior React Js Developer"
 					value="Senior React Js Developer"
-				></el-option>
-				<el-option label="Designer" value="Designer"></el-option>
+				/>
+				<el-option label="Designer" value="Designer" />
 			</el-select>
 		</el-form-item>
 
@@ -63,10 +63,10 @@ export default {
 	},
 	computed: {
 		fullNamePH: {
-			get: function() {
+			get() {
 				return this.placeholder.firstName + " " + this.placeholder.lastName
 			},
-			set: function(value) {
+			set(value) {
 				const names = value.split(" ")
 				this.placeholder.firstName = names[0]
 				this.placeholder.lastName = names[names.length - 1]
