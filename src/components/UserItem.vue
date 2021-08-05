@@ -1,5 +1,5 @@
 <template>
-	<li @click="onClick" :class="[activeId == user.id ? `active` : '']">
+	<li @click="onClick" :class="[activeId == user.id ? 'active' : '']">
 		{{ fullName }}
 	</li>
 </template>
@@ -7,17 +7,17 @@
 <script>
 export default {
 	props: {
-		user: Object,
-		activeId: null || Number,
+		user: { type: Object, required: true },
+		activeId: { type: Number, required: true },
 	},
 	computed: {
-		fullName: function() {
+		fullName() {
 			return this.user.firstName + " " + this.user.lastName
 		},
 	},
 	methods: {
 		onClick() {
-			this.$emit(`setCurrentUser`, this.user)
+			this.$emit("setCurrentUser", this.user)
 		},
 	},
 }
