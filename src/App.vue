@@ -2,16 +2,12 @@
 	<div id="app">
 		<div id="user-wrapper">
 			<UsersCounter />
-			<UsersList
-				:users="users"
-				:activeId="activeId"
-				@setCurrentUser="setCurrentUser"
-			/>
+			<UsersList :activeId="activeId" />
 			<div v-if="currentUser">
-				<UserInformation :user="currentUser" />
+				<UserInformation />
 			</div>
 		</div>
-		<AddNewUser @add-new-user="addNewUser" />
+		<AddNewUser />
 		<CustomInput v-model="customInputText" />
 		{{ customInputText }}
 	</div>
@@ -21,7 +17,6 @@
 import UsersList from "@/components/UsersList"
 import AddNewUser from "@/components/AddNewUser"
 import CustomInput from "@/components/CustomInput"
-import { eventBus } from "@/main"
 import UsersCounter from "@/components/UsersCounter"
 import { mapGetters, mapActions } from "vuex"
 
@@ -30,7 +25,6 @@ export default {
 	data() {
 		return {
 			customInputText: "",
-			currentUser: null,
 			areUserInformationNeeded: false,
 		}
 	},
@@ -40,6 +34,7 @@ export default {
 		},
 		...mapGetters({
 			users: "users/allUsers",
+			currentUser: "users/currentUser",
 		}),
 	},
 	watch: {
@@ -61,15 +56,9 @@ export default {
 		UsersCounter,
 	},
 	methods: {
-		addNewUser(newUser) {
-			this.users.push(newUser)
-
-			eventBus.$emit("changeUsersNumber", this.users.length)
-		},
-		setCurrentUser(user) {
-			this.currentUser = user
-		},
-		...mapActions({ getAllUsers: "users/getAllUsers" }),
+		...mapActions({
+			getAllUsers: "users/getAllUsers",
+		}),
 	},
 	async mounted() {
 		this.getAllUsers()

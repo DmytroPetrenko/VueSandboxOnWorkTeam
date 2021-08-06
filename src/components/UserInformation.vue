@@ -12,12 +12,12 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
 export default {
-	props: { user: { type: Object, required: true } },
-	methods: {
-		onChange(e, key) {
-			this.user[key] = e.target.innerText
-		},
+	computed: {
+		...mapGetters({
+			user: "users/currentUser",
+		}),
 	},
 	watch: {
 		user: {
@@ -32,6 +32,17 @@ export default {
 			},
 			deep: true,
 		},
+	},
+	methods: {
+		onChange(e, key) {
+			/* так же нельзя, верно?
+			this.user[key] = e.target.innerText */
+
+			this.changeUserProperty({ key, newValue: e.target.innerText })
+		},
+		...mapActions({
+			changeUserProperty: "users/changeUserProperty",
+		}),
 	},
 }
 </script>

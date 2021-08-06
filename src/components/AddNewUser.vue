@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 export default {
 	data() {
 		return {
@@ -80,15 +81,19 @@ export default {
 
 				const names = this.form.fullName.split(" ")
 
-				this.$emit("add-new-user", {
+				this.createUser({
 					id: Date.now(),
 					firstName: names[0],
 					lastName: names[names.length - 1],
 					position: this.form.position,
 				})
+
 				this.form.fullName = ""
 			}
 		},
+		...mapActions({
+			createUser: "users/createUser",
+		}),
 	},
 }
 </script>

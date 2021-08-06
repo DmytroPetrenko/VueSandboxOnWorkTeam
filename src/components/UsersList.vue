@@ -6,7 +6,6 @@
 				:key="user.id"
 				:user="user"
 				:activeId="activeId"
-				@setCurrentUser="setCurrentUser"
 			/>
 		</transition-group>
 	</ul>
@@ -14,16 +13,16 @@
 
 <script>
 import UserItem from "@/components/UserItem"
+import { mapGetters } from "vuex"
 export default {
 	props: {
-		users: { type: Array, required: true },
 		activeId: { type: Number },
 	},
 	components: { UserItem },
-	methods: {
-		setCurrentUser(user) {
-			this.$emit(`setCurrentUser`, user)
-		},
+	computed: {
+		...mapGetters({
+			users: "users/allUsers",
+		}),
 	},
 }
 </script>

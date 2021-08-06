@@ -1,21 +1,15 @@
 <template>
-	<div>Users DB contain {{ usersInDB }} users</div>
+	<div>Users DB contain {{ usersCount }} users</div>
 </template>
 
 <script>
-import { eventBus } from "@/main"
+import { mapGetters } from "vuex"
 
 export default {
-	data() {
-		return {
-			usersInDB: 4,
-		}
-	},
-	created() {
-		eventBus.$on("changeUsersNumber", (data) => (this.usersInDB = data))
-	},
-	beforeDestroy() {
-		eventBus.$off("changeUsersNumber")
+	computed: {
+		...mapGetters({
+			usersCount: "users/usersCount",
+		}),
 	},
 }
 </script>

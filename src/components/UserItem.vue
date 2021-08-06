@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 export default {
 	props: {
 		user: { type: Object, required: true },
@@ -17,8 +18,11 @@ export default {
 	},
 	methods: {
 		onClick() {
-			this.$emit("setCurrentUser", this.user)
+			this.setCurrentUser(this.user)
 		},
+		...mapActions({
+			setCurrentUser: "users/setCurrentUser",
+		}),
 	},
 }
 </script>
